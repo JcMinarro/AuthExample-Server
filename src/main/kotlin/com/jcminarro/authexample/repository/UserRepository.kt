@@ -32,4 +32,6 @@ class UserRepository(val accessTokenDB: AccessTokenDB, val refreshTokenDB: Refre
     private fun generateOAuth(user: User): OAuth =
             OAuth(generateAccessToken(user),
                     generateRefreshToken(user))
+
+    fun getUserByRefreshToken(refreshToken: String) = refreshTokenDB[refreshToken]?.let { getUser(it) }
 }
