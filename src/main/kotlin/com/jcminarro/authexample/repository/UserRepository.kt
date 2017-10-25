@@ -34,4 +34,6 @@ class UserRepository(val accessTokenDB: AccessTokenDB, val refreshTokenDB: Refre
                     generateRefreshToken(user))
 
     fun getUserByRefreshToken(refreshToken: String) = refreshTokenDB.remove(refreshToken)?.let { getUser(it) }
+
+    fun getUserIdByAccessToken(accessToken: String) = accessTokenDB[accessToken]
 }
