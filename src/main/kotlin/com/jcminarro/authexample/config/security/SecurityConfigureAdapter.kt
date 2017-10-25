@@ -26,7 +26,9 @@ class SecurityConfigureAdapter(
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
-                    .antMatchers(EndpointPath.LOGIN).permitAll()
+                    .antMatchers(
+                            EndpointPath.LOGIN,
+                            EndpointPath.REFRESH).permitAll()
                     .anyRequest().authenticated()
     }
 }
