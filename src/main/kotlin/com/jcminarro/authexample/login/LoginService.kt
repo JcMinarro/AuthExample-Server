@@ -1,5 +1,6 @@
 package com.jcminarro.authexample.login
 
+import com.jcminarro.authexample.config.error.InvalidCredentialException
 import com.jcminarro.authexample.model.OAuth
 import com.jcminarro.authexample.model.User
 import com.jcminarro.authexample.repository.UserRepository
@@ -14,7 +15,7 @@ class LoginService(val userRepository: UserRepository) {
             userRepository.getUser(generateUserId(username))
                     ?.let {
                         if (isSamePassword(it, password)) userRepository.refreshOAuth(it)
-                        else throw Exception()
+                        else throw InvalidCredentialException()
                     } ?: userRepository.refreshOAuth(createNewUser(username, password))
 
     private fun isSamePassword(user: User, password: String): Boolean =
